@@ -1,0 +1,289 @@
+.slider {
+  width: 800px;
+  margin: 0 auto;
+  padding: 50px 0;
+  overflow: hidden;
+  
+  img {
+    aspect-ratio: 16/9;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.slider-dots {
+  width: 30%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+  list-style: none;
+  margin-top:-50px;
+
+  
+  li {
+    display: inline-block;
+    width: calc(15% - 8px);
+    margin: 0 5px;
+  }
+  
+  button {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    border: 0;
+    background-color: #ffffff;
+    font-size: 0;
+    
+    &:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      display: block;
+      width: 0%;
+      height: 100%;
+    }
+  }
+  
+  .slick-active {
+    button:after {
+      background-color: #ed3338;
+      animation: progress 3s linear forwards;
+    }
+  }
+}
+
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+  
+  to {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 768px){
+  .slick-slider .slick-track {
+    margin-left: 0px !important;
+}
+}
+      .slick-prev, .slick-next {
+    font-size: 30;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: white;
+    border: none;
+    outline: none;
+    
+    z-index: 100000;
+}
+.slick-prev {
+    left: 25px !important;
+}
+.slick-next {
+    right: 25px !important;
+   
+}
+.slick-next:before {
+    content: '\f105' !important;
+    font-size: 60px !important;
+
+    opacity: 10  !important;
+}
+.slick-prev:before, .slick-next:before {
+    font-family: FontAwesome !important;
+    font-size: 60px  !important;
+
+    opacity: 10  !important;
+  
+}
+
+.slick-prev:before {
+  content: '\f104' !important;
+}
+
+
+.related-blog-section .slick-slider .slick-slide, .quick-link-outer .slick-slider .slick-slide {
+  margin-right: 27px;
+  width: 252px !important;
+}
+
+.level2 > a{text-decoration: none;}
+.level1 > a{text-decoration: none;}
+
+.remove_blue{
+background: "transparent !important";
+height: inherit;
+padding: 0;
+min-Width: "inherit"
+}
+.expand_button{
+color: #ffffff;
+background: rgb(34 34 34) ;
+ border: 0px
+}
+
+.view_all{ background: #ffffff;
+  font-Size: 16px;
+  font-weight: 500;
+  color: #304087;
+  padding: 12px;
+}
+.view_all_div{
+
+   padding-top: 10px;
+   text-align: center;
+}
+.cards-font
+{
+text-align:left;
+font-size: 15px;
+color:#606060;
+padding-top: 9px;
+}
+.cards-body{padding: 10px}
+.cards-body_align{text-align:left}
+.cards-body-h6
+{text-align:left;
+font-size: 18px;
+color:#303030}
+.card-main-div{ 
+background:#ffffff;
+border-radius: 5px;
+padding: 10px}
+
+.slick-track
+{ 
+opacity: 1;
+transform:translate3d(0px, 0px, 0px)
+}
+.padding9{padding: 9px;padding-top: 5px;padding-bottom: 5px;}
+.producttabs{ 
+display: block;
+padding-right: 0px}
+
+@media screen and (min-width: 768px){
+.common-tab-wrap .nav-tabs {
+    padding-right: 0px;
+}
+}
+
+.csr-cate-card-wrap::after {
+  border: 1px solid #D9D9D9;
+  background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%) !important;
+}
+
+.producttabs-div{display: inline !important}
+.producttabs{text-align: center !important;display: block;}
+.common-tab-wrap .nav-tabs{padding-right: 0px !important;display: block;}
+.productmain-tabs{ position: relative !important; top: 0}
+.API-text-center{ color: #ffffff;font-weight: 400;text-align: center; }
+.main-text-center{color: #ffffff;text-align: center;}
+.blue_back{background: #304087 !important;}
+.reg-text-center{color: #262626;text-align: center; }
+.reg-sub-text-center{ color:#262626;
+  font-size: 18px;
+  padding-top: 8px;
+  font-weight: 400;text-align: center;}
+  .product-wrapper{
+    border: 0px solid #dbe0f2 !important;
+  }
+
+  .view_all{background: #ffffff !important;color:#304087 !important}
+  .product-wrapper h4{ 
+    color: #262626;
+    font-size: 28px;
+    padding-top: 10px;
+  }
+  .title-block-text{
+    color: #606060;
+    font-weight: 400;
+    font-size: 16px;
+  
+    padding-top: 16px}
+
+    .partner-text-center{text-align: center;}
+    .partner-text-center a{ font-weight: 500;
+      font-size: 16px}
+      .img-fluid-width{width: 400px;}
+      .div-width{max-width: 500px}
+      .div-width h3{text-align: left;        
+          padding-bottom: 10px;
+        padding-top: 20px}
+
+        .div-width h5{text-align: left;        
+          color: #11222E;
+          font-size: 16px
+        }
+        .remove-padding-left{ text-align: left;
+          padding-top: 40px}
+          .remove-border{border: 0px solid #dbe0f2}
+          .remove-border .fa{ 
+              padding: 10px;
+            background: #C8CACC;
+            padding-left: 12px ;
+
+            width: 40px;
+            height: 40px;
+            color: #1b3280;
+            border-top-left-radius: 25px;
+border-top-right-radius: 25px; 
+border-Bottom-Left-Radius: 25px; 
+border-Bottom-Right-Radius: 25px; }
+
+.remove-border h4{ color: #262626;
+font-size: 18px;
+margin-top: 8px}
+
+.bg-gray-c{
+  background: #ffffff !important;
+  padding: 20px 0px;
+  padding-bottom: 0px;
+}
+.banner-info-inner a{
+  margin-top: 25px;
+  font-weight: 500;
+}
+.banner-info{background: transparent;}
+.imgback1{background-image:url("/pages/themes/custom/rbl_bank/images/back1.png")}
+.imgback2{background-image:url("/pages/themes/custom/rbl_bank/images/imgback2.jpg")}
+.imgback3{background-image:url("/pages/themes/custom/rbl_bank/images/imgback3.jpg")}
+
+.fa-sign-in{
+  font-size: 20px !important;
+  color: #304087;
+}
+
+.logo-mob1{height: 24px}
+.marginbottom2{margin-bottom: -2px}
+.login-btn-adj
+{
+  
+  width: auto;
+  text-transform: none
+}
+.buttonreg{background: #FFFEFA !important;text-transform: inherit !important;}
+.linkcolorwhite{color:#ffffff !important;font-size: 16px;}
+.mainlogo{ margin-top: 22px; width: 215px}
+.paddingcopy{padding-left: 70px;padding-top: 10px}
+
+.blogimg1{background-image:url("/pages/themes/custom/rbl_bank/images/image1.png")}
+.blogimg2{background-image:url("/pages/themes/custom/rbl_bank/images/image2.png")}
+.blogimg3{background-image:url("/pages/themes/custom/rbl_bank/images/image3.png")}
+.blogimg4{background-image:url("/pages/themes/custom/rbl_bank/images/image4.png")}
+.blogimg5{background-image:url("/pages/themes/custom/rbl_bank/images/identity-theft-safe-banking.jpg")}
+
+.liborderline{border-bottom: 1px solid red;}
+
+/* Add more custom styles as needed */
+.css-8i0j0q{position: relative !important;}
+.ps-sidebar-root{background: red;}
+.ps-sidebar-backdrop{position: relative !important;}

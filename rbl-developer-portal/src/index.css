@@ -1,0 +1,111 @@
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+
+		
+	
+  .box_blank{background:#304087;color:#ffffff;}
+      .box_blank h6{color:#ffffff;    font-size: 18px;}
+      .box_blank p{color:#ffffff;    font-size: 16px;padding-top: 9px;line-height: 20px;}
+      .box_blank .border{background: #304087;
+  border: 2px solid #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;padding: 10px 20px;height: 48px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;    border-radius: 4px;}
+  body .common-header-wrap .rbl-nav-header .navbar-brand {
+
+  width: 228px;border-left:3px solid #ffffff;
+ 
+}
+.box_blank .card-body{
+  border: dashed 1.7px #FFFAFA;
+  border-radius: 11px;padding:20px 20px 30px 20px;
+}
+  .common-tab-wrap .nav-tabs .nav-link.active {
+  color: #304087 !important;
+  font-weight: 700;
+  border-color: rgba(0,0,0,0);
+  background: white;
+  border-radius: 44px;
+}
+.common-tab-wrap .nav-tabs .nav-link {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  color: #ffffff !important;
+  position: relative;
+  border-color: rgba(0,0,0,0) !important;
+  background: rgba(0,0,0,0);
+}
+.iconcircle {
+  background: #D9D9D9;
+  padding: 9px;
+  font-size: 16px;
+  color: #000000;
+  border-radius: 50%;
+height:40px;
+}
+.timebutton {
+  border-radius: 5px;
+  background: #D9D9D9;
+  padding: 4px 10px 4px 10px;
+  font-size: 14px;
+  color: #303030;
+  text-decoration: none;
+font-weight:500;
+border:0px solid red;
+}
+
+.has-children>.acnav__label::after {
+
+  font-size:0px;
+ 
+}
+
+      .acnav__list--level4-pl30{
+        padding-left: 24px !important;
+      }
+  
+  .csr-cate-card-wrap::after{    background: #ffffff;
+  border: 1px solid #D9D9D9;}
+.csr-cate-card-wrap .csr-cate-card-wrap-inner {
+  position: relative;
+  z-index: 5;
+  padding: 30px 20px 20px;
+  top: 0;
+  min-height: 150px;
+}
+
+.csr-cate-card-wrap::after {
+ 
+  border-radius: 16px;
+}
+
+@media (max-width: 767px){
+.path-frontpage .credit-carousel.d-sm-block.d-md-none {
+  display: block !important;
+ 
+}
+}
+
+@media screen and (max-width: 767px){
+.modal.right.fade .modal-dialog {
+  height: -webkit-fill-available !important;
+  top: 80px;
+  width: calc(100% - 56px) !important;
+}
+}
+
+.divmobile{position: relative !important;}
+.css-1wvake5.ps-broken{position: relative !important;}
+.css-8i0j0q{position: relative !important;}
+.gAvAzt{display: none;}
+
+
+.divpadding1{padding-left: 100px;}
+  .divpaddingleft ul{list-style-type: circle;}

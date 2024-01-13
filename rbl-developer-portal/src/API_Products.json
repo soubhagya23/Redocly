@@ -1,0 +1,22 @@
+[
+	{
+      		"CatCode": "Collection",
+      		"ProdCode" : "Virt_AC_API_Plan",
+		"ProdDisplayName": "Virtual Account API Plan"
+	},
+	{
+      		"CatCode": "Collection",
+      		"ProdCode" : "UPI_Collection_API",
+		"ProdDisplayName": "UPI Collection of API Product"
+	},
+	{
+		"CatCode": "KYC",
+		"ProdCode" : "JOKATA_API",
+		"ProdDisplayName": "JOKATA API Product"	
+  	},
+	{
+		"CatCode": "KYC",
+		"ProdCode" : "EKYC_Requery_API",
+		"ProdDisplayName": "eKYC Requery API Product"	
+  	}
+]

@@ -1,0 +1,113 @@
+/* 
+Created on: 17 Sep, 2014, 4:29:37 PM
+Author: senthil
+*/
+
+.time_pick .ti_tx,
+.time_pick .mi_tx,
+.time_pick .mer_tx {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.time_pick .time,
+.time_pick .mins,
+.time_pick .meridian {
+  width: 60px;
+  float: left;
+  margin: 0 0;
+  font-size: 20px;
+  color: #2d2e2e;
+  font-family: arial;
+  font-weight: 700;
+}
+
+.time_pick .prev,
+.time_pick .next {
+  cursor: pointer;
+  padding: 18px;
+  width: 28%;
+  border: 1px solid #ccc;
+  margin: auto;
+  background: url(../images/arrow.png) no-repeat;
+  border-radius: 5px;
+}
+
+.time_pick .prev:hover,
+.time_pick .next:hover {
+  background-color: #ccc;
+}
+
+.time_pick .next {
+  background-position: 50% 150%;
+}
+
+.time_pick .prev {
+  background-position: 50% -50%;
+}
+
+.time_pick .time_pick {
+  position: relative;
+}
+
+.time_pick .timepicker_wrap {
+  padding: 10px;
+  border-radius: 5px;
+  z-index: 998;
+  display: none;
+  box-shadow: 2px 2px 5px 0 rgba(50, 50, 50, 0.35);
+  background: #fff;
+  border: 1px solid #ccc;
+  float: left;
+  position: absolute;
+  top: 27px;
+  left: 0;
+}
+
+.time_pick .arrow_top {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background: url(../images/top_arr.png) no-repeat;
+  width: 18px;
+  height: 10px;
+  z-index: 999;
+}
+.time_pick input.timepicki-input {
+  background: none repeat scroll 0 0 #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 5px 5px 5px 5px;
+  float: none;
+  margin: 0;
+  text-align: center;
+  width: 70%;
+}
+.time_pick a.reset_time {
+  float: left;
+  margin-top: 5px;
+  color: #000;
+}
+
+
+.time_pick .timepicker_wrap {
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 998;
+    display: none;
+    box-shadow: 2px 2px 5px 0 rgba(50, 50, 50, 0.35);
+    background: #fff;
+    border: 1px solid #ccc;
+    float: left;
+    position: absolute;
+    top: 27px;
+    left: 0;
+    transform: scale(0.8);
+    transform-origin: 0 2px;
+    /* margin-top: 20px; */
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -o-transform: scale(0.8);
+}
+

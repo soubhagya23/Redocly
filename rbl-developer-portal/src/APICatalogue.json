@@ -1,0 +1,110 @@
+{
+  "Category": [
+    {
+      "CatName": "Collection",
+      "Product": [
+        {
+          "ProdName": "virtual-account-api-plan",
+          "API": [
+            {
+              "APIName": "Collection alert based on date and time ",
+              "APIDesc": "It will be used to fetch the JSON requests of collection alerts based on date or time."
+            },
+            {
+              "APIName": "Virtual Account Creation API",
+              "APIDesc": "This API will help user to create a virtual account"
+            }
+           
+            
+          ]
+        },
+        {
+          "ProdName": "upi-collection-of-api-product",
+          "API": [
+            {
+              "APIName": "UPI Collections API",
+              "APIDesc": "Through RBL, a registered user can raise request for money from another registered user. Funds will be transferred when the user authorizes the collection."
+            }
+           
+          ]
+        }
+      ]
+    },
+    {
+      "CatName": "KYC",
+      "Product": [
+        {
+          "ProdName": "aadhaar-ref-key-generation-api-product",
+          "API": [
+            {
+              "APIName": "Aadhaar Ref Key Generation API",
+              "APIDesc": "This API will generate Reference key against Aadhaar number."
+            }
+         
+          ]
+        },
+        {
+          "ProdName": "jocata-api-product",
+          "API": [
+            {
+              "APIName": "AML Check API",
+              "APIDesc": "This  API enables the client to perform AML check for both the remitter and beneficiary to avoid money laundering activities."
+            }
+           
+          ]
+        }
+      ]
+    },
+    {
+      "CatName": "Payments",
+      "Product": [
+        {
+          "ProdName": "aeps-api-product",
+          "API": [
+            {
+              "APIName": "Adhar Based Payment API",
+              "APIDesc": "AePS API allows customers to withdraw cash using their Aadhaar & fingerprint. "
+            }
+           
+          ]
+        },
+        {
+          "ProdName": "single-payment-with-beneid-tgam-api-product",
+          "API": [
+            {
+              "APIName": "Beneficiary Registration API",
+              "APIDesc": "This API can be consumed by corporate who have nodal arrangement with bank .This API enables to capture the KYC details of merchants registered with aggregators."
+            }
+            
+          ]
+        }
+      ]
+    },
+    {
+      "CatName": "Value added services",
+      "Product": [
+        {
+          "ProdName": "agent-consent-status-api-product",
+          "API": [
+            {
+              "APIName": "Session creation API",
+              "APIDesc": "This API will be used to create user session."
+            }
+            
+          ]
+        },
+        {
+          "ProdName": "account-statement-api-product",
+          "API": [
+            {
+              "APIName": "Account Statement API",
+              "APIDesc": "Get customer account statement API helps to fetch statement in PDF format based on passing account number and date range. Date range should not be more than 92 days."
+            }
+           
+          ]
+        }
+      ]
+    }
+ 
+  ]
+}

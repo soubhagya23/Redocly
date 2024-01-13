@@ -1,0 +1,862 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Corporate Account Statement API",
+      "version": "1.0.0-rev8",
+      "description": "This is the Corporate Account Statement API  \n - Receive an instant overview of transactions on in your account and you don't even need to be logged in to your Internet banking account \n - Know your bank account balance instantly / Get a consolidated view of your account \n - Account attributes can be fetched in one click (attribute includes a/c name, cust id, cust segment, Primary RM etc.) \n Benefits:  \n - Real time account status details – the pull and push of data will be automatic thus, will have the most updated status details of your accounts \n - At the emotional level, will be freed of substantial time (the upload and download/ reconciliation) which can be devoted to some other work \n - Omission of manual entries, which will ensure error-free reporting \n - Identify services used and the associated bank fees, especially for large accounts \n - View account statement of first 24 months (i.e. Statement for past 24 months will be available online)"
+    },
+    "servers": [
+      {
+        "url": "https://apideveloper.rblbank.com/test/sb/rbl/v1/cas/"
+      }
+    ],
+    "security": [],
+    "tags": [
+      {
+        "description": "The following are the information that needs to be passed in every invocation to access \n1. API endpoints to be used for consuming  the service as provided above\n2. Basic Authorization to be used using the LDAP userid and password.\n3. Client_id and Client_secret to be set as Params Key and Values (need to remove spaces before and after the client id and client secret value field). Do not make any changes in these values. Both the keys can be seen in the respective App on the web portal ( refer developer portal FAQ & guidelines for details ) 4. Request type should be application/Json.\n",
+        "name": "access requirements",
+        "x-displayName": "Access Requirements"
+      },
+      {
+        "name": "Errors",
+        "x-displayName": "Errors",
+        "description": "| Error Code | Error Type | Description                                       | \n|------------|------------|---------------------------------------------------| \n| ER001      | General    | Improper JSON Format                              | \n| ER002      | Validation | Schema Validation Failure                         | \n| ER003      | Validation | Invalid CorpId                                    | \n| ER004      | Technical  | Technical Failure                                 | \n| ER006      | Technical  | Timeout Exception Occurred                        | \n| ER007      | Business   | Other FI Error                                    | \n| ER008      | Validation | Invalid Corporate Hierarchy                       | \n| ER017      | Technical  | Error Occurred While Calling the Provider Service | \n| ER018      | DB Error   | Error Occurred While Accessing The ESB Database   | \n| ER034      | Validation | Request not valid for the given Account Number    |"
+      }
+    ],
+    "paths": {
+      "/statement": {
+        "post": {
+          "tags": [
+            "Account Statement Date Range"
+          ],
+          "description": "By using this API we can get customer’s debit/credit/both account statement for the date range provided in field i.e., date given in From date and to date field",
+          "summary": "Get Account statement based on ",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Statement-Request"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Statement-Request"
+                }
+              }
+            },
+            "required": false
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Account-Statement-Response"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Account-Statement-Response"
+                  }
+                }
+              }
+            }
+          },
+          "x-codegen-request-body-name": "body"
+        }
+      },
+      "/statement_wrapper": {
+        "post": {
+          "tags": [
+            "Get Account Statement Wrapper"
+          ],
+          "description": "Gets Corporate Statement Wrapper",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Statement-Wrapper-Request"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Statement-Wrapper-Request"
+                }
+              }
+            },
+            "required": false
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Account-Statement-Response"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Account-Statement-Response"
+                  }
+                }
+              }
+            }
+          },
+          "x-codegen-request-body-name": "body"
+        }
+      },
+      "/transactions_count": {
+        "post": {
+          "tags": [
+            "Get Transaction Count"
+          ],
+          "description": "Gets Transaction Count",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction-Detail-Request"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction-Detail-Request"
+                }
+              }
+            },
+            "required": false
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Account-Statement-Response"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Account-Statement-Response"
+                  }
+                }
+              }
+            }
+          },
+          "x-codegen-request-body-name": "body"
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Statement-Wrapper-Request": {
+          "type": "object",
+          "properties": {
+            "Acc_Stmt_Period_Req": {
+              "type": "object",
+              "properties": {
+                "Header": {
+                  "type": "object",
+                  "properties": {
+                    "TranID": {
+                      "type": "string",
+                      "description": "Transaction ID generated by consumer of service  which is unique"
+                    },
+                    "Corp_ID": {
+                      "type": "string",
+                      "description": "Unique ID assigned to each enrolled Corporate"
+                    },
+                    "Approver_ID": {
+                      "type": "string",
+                      "description": "Unique ID for request approver"
+                    }
+                  }
+                },
+                "Body": {
+                  "type": "object",
+                  "properties": {
+                    "Acc_No": {
+                      "type": "string",
+                      "description": "Holds the Finacle Account ID."
+                    },
+                    "Tran_Type": {
+                      "type": "string",
+                      "description": "Provides transaction type(debit(D) or credit(C) or both(B))"
+                    },
+                    "Period": {
+                      "type": "string",
+                      "description": "Provides period choice (monthly(M) or quaterly(Q) or half-yearly(H) or yearly(Y))"
+                    },
+                    "Pagination_Details": {
+                      "type": "object",
+                      "properties": {
+                        "Last_Balance": {
+                          "type": "object",
+                          "properties": {
+                            "Amount_Value": {
+                              "type": "string",
+                              "description": "This is the Amount of the last transaction in previous response"
+                            },
+                            "Currency_Code": {
+                              "type": "string",
+                              "description": "This is the Currency Code of the last transaction in previous response"
+                            }
+                          }
+                        },
+                        "Last_Pstd_Date": {
+                          "type": "string",
+                          "description": "This is the posted date of the last transaction in previous response"
+                        },
+                        "Last_Txn_Date": {
+                          "type": "string",
+                          "description": "This is the transaction date of the last transaction in previous response"
+                        },
+                        "Last_Txn_Id": {
+                          "type": "string",
+                          "description": "This is the transaction ID of the last transaction in previous response"
+                        },
+                        "Last_Txn_SrlNo": {
+                          "type": "string",
+                          "description": "This is the transaction serial number of the last transaction in previous response."
+                        }
+                      }
+                    }
+                  }
+                },
+                "Signature": {
+                  "type": "object",
+                  "properties": {
+                    "Signature": {
+                      "type": "string",
+                      "description": "Encrypted key for authenticating the request. Currently not required."
+                    }
+                  },
+                  "description": "Encrypted key for authenticating the request. Currently not required."
+                }
+              }
+            }
+          },
+          "example": {
+            "Acc_Stmt_Period_Req": {
+              "Header": {
+                "TranID": "T01",
+                "Corp_ID": "MC001",
+                "Approver_ID": "A001"
+              },
+              "Body": {
+                "Acc_No": "100881000000236",
+                "Tran_Type": "D",
+                "Period": "M",
+                "Pagination_Details": {
+                  "Last_Balance": {
+                    "Amount_Value": "",
+                    "Currency_Code": ""
+                  },
+                  "Last_Pstd_Date": "",
+                  "Last_Txn_Date": "",
+                  "Last_Txn_Id": "",
+                  "Last_Txn_SrlNo": ""
+                }
+              },
+              "Signature": {
+                "Signature": "Signature",
+                "description": "Encrypted key for authenticating the request. Currently not required."
+              }
+            }
+          }
+        },
+        "Statement-Request": {
+          "type": "object",
+          "properties": {
+            "Acc_Stmt_DtRng_Req": {
+              "type": "object",
+              "properties": {
+                "Header": {
+                  "type": "object",
+                  "properties": {
+                    "TranID": {
+                      "type": "string",
+                      "description": "Transaction ID generated by consumer of service which is unique."
+                    },
+                    "Corp_ID": {
+                      "type": "string",
+                      "description": "Unique ID assigned to each enrolled Corporate"
+                    },
+                    "Approver_ID": {
+                      "type": "string",
+                      "description": "Unique ID for request approver"
+                    }
+                  }
+                },
+                "Body": {
+                  "type": "object",
+                  "properties": {
+                    "Acc_No": {
+                      "type": "string",
+                      "description": "Holds the Finacle Account ID."
+                    },
+                    "Tran_Type": {
+                      "type": "string",
+                      "description": "Provides transaction type(debit(D) or credit(C) or both(B))"
+                    },
+                    "From_Dt": {
+                      "type": "string",
+                      "description": "Holds the date from which the transaction details are required for the account"
+                    },
+                    "Pagination_Details": {
+                      "type": "object",
+                      "properties": {
+                        "Last_Balance": {
+                          "type": "object",
+                          "properties": {
+                            "Amount_Value": {
+                              "type": "string",
+                              "description": "This is the Amount of the last transaction in previous response"
+                            },
+                            "Currency_Code": {
+                              "type": "string",
+                              "description": "This is the Currency Code of the last transaction in previous response"
+                            }
+                          }
+                        },
+                        "Last_Pstd_Date": {
+                          "type": "string",
+                          "description": "This is the posted date of the last transaction in previous response"
+                        },
+                        "Last_Txn_Date": {
+                          "type": "string",
+                          "description": "This is the transaction date of the last transaction in previous response"
+                        },
+                        "Last_Txn_Id": {
+                          "type": "string",
+                          "description": "This is the transaction ID of the last transaction in previous response"
+                        },
+                        "Last_Txn_SrlNo": {
+                          "type": "string",
+                          "description": "This is the transaction serial number of the last transaction in previous response."
+                        }
+                      }
+                    },
+                    "To_Dt": {
+                      "type": "string",
+                      "description": "Holds the date up to which the transaction details are required for the account."
+                    }
+                  }
+                },
+                "Signature": {
+                  "type": "object",
+                  "properties": {
+                    "Signature": {
+                      "type": "string",
+                      "description": "Encrypted key for authenticating the request. Currently not required."
+                    }
+                  },
+                  "description": "Encrypted key for authenticating the request. Currently not required."
+                }
+              }
+            }
+          },
+          "example": {
+            "Acc_Stmt_DtRng_Req": {
+              "Header": {
+                "TranID": "1",
+                "Corp_ID": "MC001",
+                "Approver_ID": "A001"
+              },
+              "Body": {
+                "Acc_No": "1008810030000236",
+                "Tran_Type": "D",
+                "From_Dt": "2014-10-28",
+                "Pagination_Details": {
+                  "Last_Balance": {
+                    "Amount_Value": "",
+                    "Currency_Code": ""
+                  },
+                  "Last_Pstd_Date": "",
+                  "Last_Txn_Date": "",
+                  "Last_Txn_Id": "",
+                  "Last_Txn_SrlNo": ""
+                },
+                "To_Dt": "2014-10-31"
+              },
+              "Signature": {
+                "Signature": "Signature"
+              }
+            }
+          },
+          "required": [
+            "Acc_No",
+            "Tran_Type",
+            "From_Dt",
+            "To_Dt"
+          ]
+        },
+        "Transaction-Detail-Request": {
+          "type": "object",
+          "properties": {
+            "Acc_Stmt_TrnCnt_Req": {
+              "type": "object",
+              "properties": {
+                "Header": {
+                  "type": "object",
+                  "properties": {
+                    "TranID": {
+                      "type": "string",
+                      "description": "Transaction ID generated by consumer of service  which is unique"
+                    },
+                    "Corp_ID": {
+                      "type": "string",
+                      "description": "Unique ID assigned to each enrolled Corporate"
+                    },
+                    "Approver_ID": {
+                      "type": "string",
+                      "description": "Unique ID for request approver"
+                    }
+                  }
+                },
+                "Body": {
+                  "type": "object",
+                  "properties": {
+                    "Acc_No": {
+                      "type": "string",
+                      "description": "Holds the Finacle Account ID"
+                    },
+                    "Tran_Type": {
+                      "type": "string",
+                      "description": "Provides transaction type(debit(D) or credit(C) or both(B))"
+                    },
+                    "Tran_Cnt": {
+                      "type": "string",
+                      "description": "Holds the number of transactions needed to be fetched"
+                    },
+                    "Pagination_Details": {
+                      "type": "object",
+                      "properties": {
+                        "Last_Balance": {
+                          "type": "object",
+                          "properties": {
+                            "Amount_Value": {
+                              "type": "string",
+                              "description": "This is the Amount of the last transaction in previous response"
+                            },
+                            "Currency_Code": {
+                              "type": "string",
+                              "description": "This is the Currency Code of the last transaction in previous response"
+                            }
+                          }
+                        },
+                        "Last_Pstd_Date": {
+                          "type": "string",
+                          "description": "This is the posted date of the last transaction in previous response"
+                        },
+                        "Last_Txn_Date": {
+                          "type": "string",
+                          "description": "This is the transaction date of the last transaction in previous response"
+                        },
+                        "Last_Txn_Id": {
+                          "type": "string",
+                          "description": "This is the transaction ID of the last transaction in previous response"
+                        },
+                        "Last_Txn_SrlNo": {
+                          "type": "string",
+                          "description": "This is the transaction serial number of the last transaction in previous response"
+                        }
+                      }
+                    }
+                  }
+                },
+                "Signature": {
+                  "type": "object",
+                  "properties": {
+                    "Signature": {
+                      "type": "string",
+                      "description": "Encrypted key for authenticating the request. Currently not required"
+                    }
+                  },
+                  "description": "Encrypted key for authenticating the request. Currently not required"
+                }
+              }
+            }
+          },
+          "example": {
+            "Acc_Stmt_TrnCnt_Req": {
+              "Header": {
+                "TranID": "T01",
+                "Corp_ID": "MC001",
+                "Approver_ID": "A001"
+              },
+              "Body": {
+                "Acc_No": "1008810030000236",
+                "Tran_Type": "B",
+                "Tran_Cnt": "2",
+                "Pagination_Details": {
+                  "Last_Balance": {
+                    "Amount_Value": "",
+                    "Currency_Code": ""
+                  },
+                  "Last_Pstd_Date": "",
+                  "Last_Txn_Date": "",
+                  "Last_Txn_Id": "",
+                  "Last_Txn_SrlNo": ""
+                }
+              },
+              "Signature": {
+                "Signature": "Signature",
+                "description": "Encrypted key for authenticating the request. Currently not required"
+              }
+            }
+          }
+        },
+        "Account-Statement-Response": {
+          "type": "object",
+          "properties": {
+            "Acc_Stmt_DtRng_Res": {
+              "type": "object",
+              "properties": {
+                "Header": {
+                  "type": "object",
+                  "properties": {
+                    "TranID": {
+                      "type": "string",
+                      "description": "Transaction Id that will be entered by the customer and it will be unique for each request."
+                    },
+                    "Corp_ID": {
+                      "type": "string",
+                      "description": "Unique ID assigned to each enrolled Corporate"
+                    },
+                    "Approver_ID": {
+                      "type": "string",
+                      "description": "Unique ID for request approver"
+                    },
+                    "Status": {
+                      "type": "string",
+                      "description": "Transaction Status"
+                    },
+                    "Error_Cde": {
+                      "type": "string",
+                      "description": "If Error occurs provides error code"
+                    },
+                    "Error_Desc": {
+                      "type": "string",
+                      "description": "If Error occurs provides error description"
+                    }
+                  }
+                },
+                "Body": {
+                  "type": "object",
+                  "properties": {
+                    "accountBalances": {
+                      "type": "object",
+                      "properties": {
+                        "acid": {
+                          "type": "string",
+                          "description": "Holds the Finacle Account ID"
+                        },
+                        "availableBalance": {
+                          "type": "object",
+                          "properties": {
+                            "amountValue": {
+                              "type": "string",
+                              "description": "Provides the adhoc limit granted to account"
+                            },
+                            "currencyCode": {
+                              "type": "string",
+                              "description": "Provides Currency Code of the amount"
+                            }
+                          }
+                        },
+                        "branchId": {
+                          "type": "string",
+                          "description": "Provides the Finacle branch id"
+                        },
+                        "currencyCode": {
+                          "type": "string",
+                          "description": "Provides Currency Code of the amount"
+                        },
+                        "fFDBalance": {
+                          "type": "object",
+                          "properties": {
+                            "amountValue": {
+                              "type": "string",
+                              "description": "Provides the adhoc limit granted to account"
+                            },
+                            "currencyCode": {
+                              "type": "string",
+                              "description": "Provides Currency Code of the amount"
+                            }
+                          }
+                        },
+                        "floatingBalance": {
+                          "type": "object",
+                          "properties": {
+                            "amountValue": {
+                              "type": "string",
+                              "description": "Provides the adhoc limit granted to account"
+                            },
+                            "currencyCode": {
+                              "type": "string",
+                              "description": "Provides Currency Code of the amount"
+                            }
+                          }
+                        },
+                        "ledgerBalance": {
+                          "type": "object",
+                          "properties": {
+                            "amountValue": {
+                              "type": "string",
+                              "description": "Provides the adhoc limit granted to account"
+                            },
+                            "currencyCode": {
+                              "type": "string",
+                              "description": "Provides Currency Code of the amount"
+                            }
+                          }
+                        },
+                        "userDefinedBalance": {
+                          "type": "object",
+                          "properties": {
+                            "amountValue": {
+                              "type": "string",
+                              "description": "Provides the adhoc limit granted to account"
+                            },
+                            "currencyCode": {
+                              "type": "string",
+                              "description": "Provides Currency Code of the amount"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "hasMoreData": {
+                      "type": "string",
+                      "description": "Either 'Y' or ''. If 'Y' then it has more transactions. If '' then no more transactions."
+                    },
+                    "transactionDetails": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "pstdDate": {
+                            "type": "string",
+                            "description": "Provides the transaction posted date."
+                          },
+                          "transactionSummary": {
+                            "type": "object",
+                            "properties": {
+                              "instrumentId": {
+                                "type": "string",
+                                "description": "Provides instrument ID for the transaction."
+                              },
+                              "txnAmt": {
+                                "type": "object",
+                                "properties": {
+                                  "amountValue": {
+                                    "type": "string",
+                                    "description": "Provides the adhoc limit granted to account"
+                                  },
+                                  "currencyCode": {
+                                    "type": "string",
+                                    "description": "Provides Currency Code of the amount"
+                                  }
+                                }
+                              },
+                              "txnDate": {
+                                "type": "string",
+                                "description": "Provides transaction date"
+                              },
+                              "txnDesc": {
+                                "type": "string",
+                                "description": "Provides particulars related to the transaction."
+                              },
+                              "txnType": {
+                                "type": "string",
+                                "description": "D/C/B Provides transaction type(debit(D) or credit(C) or both(B))"
+                              }
+                            }
+                          },
+                          "txnBalance": {
+                            "type": "object",
+                            "properties": {
+                              "amountValue": {
+                                "type": "string",
+                                "description": "Provides the adhoc limit granted to account"
+                              },
+                              "currencyCode": {
+                                "type": "string",
+                                "description": "Provides Currency Code of the amount"
+                              }
+                            }
+                          },
+                          "txnCat": {
+                            "type": "string",
+                            "description": "Provides transaction category (type(length 1 char) and sub type(length 2 char)).The type has possible values C - Cash, T - Transfer, L - Clearing .The subtype has the possible values BI, CI, NP, NR"
+                          },
+                          "txnId": {
+                            "type": "string",
+                            "description": "Provides transaction ID of the inquiry"
+                          },
+                          "txnSrlNo": {
+                            "type": "string",
+                            "description": "Provides transaction serial number of the inquiry."
+                          },
+                          "valueDate": {
+                            "type": "string",
+                            "description": "Provides business date of the transaction"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "Signature": {
+                  "type": "object",
+                  "properties": {
+                    "Signature": {
+                      "type": "string",
+                      "description": "Encrypted key for authenticating the request. Currently not required."
+                    }
+                  },
+                  "description": "Encrypted key for authenticating the request. Currently not required."
+                }
+              }
+            }
+          },
+          "example": {
+            "Acc_Stmt_DtRng_Res": {
+              "Header": {
+                "TranID": "1",
+                "Corp_ID": "MC001",
+                "Approver_ID": "A001",
+                "Status": "SUCCESS",
+                "Error_Cde": "",
+                "Error_Desc": ""
+              },
+              "Body": {
+                "accountBalances": {
+                  "acid": "1008810030000236",
+                  "availableBalance": {
+                    "amountValue": "0.00",
+                    "currencyCode": "INR"
+                  },
+                  "branchId": "0001",
+                  "currencyCode": "INR",
+                  "fFDBalance": {
+                    "amountValue": "0.00",
+                    "currencyCode": "INR"
+                  },
+                  "floatingBalance": {
+                    "amountValue": "0.00",
+                    "currencyCode": "INR"
+                  },
+                  "ledgerBalance": {
+                    "amountValue": "20.00",
+                    "currencyCode": "INR"
+                  },
+                  "userDefinedBalance": {
+                    "amountValue": "0.00",
+                    "currencyCode": "INR"
+                  }
+                },
+                "hasMoreData": "",
+                "transactionDetails": [
+                  {
+                    "pstdDate": "2014-10-30T14:45:34.000",
+                    "transactionSummary": {
+                      "instrumentId": " ",
+                      "txnAmt": {
+                        "amountValue": "4000.00",
+                        "currencyCode": "INR"
+                      },
+                      "txnDate": "2014-10-30T00:00:00.000",
+                      "txnDesc": "NEFT/RATNN14303282645/ANUSHA AKKELA ",
+                      "txnType": "D"
+                    },
+                    "txnBalance": {
+                      "amountValue": "2530.12",
+                      "currencyCode": "INR"
+                    },
+                    "txnCat": "TCI",
+                    "txnId": " S625417",
+                    "txnSrlNo": " 1",
+                    "valueDate": "2014-10-30T00:00:00.000"
+                  },
+                  {
+                    "pstdDate": "2014-10-30T21:06:01.000",
+                    "transactionSummary": {
+                      "instrumentId": " ",
+                      "txnAmt": {
+                        "amountValue": "400.00",
+                        "currencyCode": "INR"
+                      },
+                      "txnDate": "2014-10-30T00:00:00.000",
+                      "txnDesc": "ATW:4591830000000312:S1VDC046:ICICI BANKLTD B 6 GR",
+                      "txnType": "D"
+                    },
+                    "txnBalance": {
+                      "amountValue": "2130.12",
+                      "currencyCode": "INR"
+                    },
+                    "txnCat": "TCI",
+                    "txnId": " S639755",
+                    "txnSrlNo": " 1",
+                    "valueDate": "2014-10-30T00:00:00.000"
+                  }
+                ]
+              },
+              "Signature": {
+                "Signature": "Signature",
+                "description": "Encrypted key for authenticating the request. Currently not required."
+              }
+            }
+          }
+        }
+      },
+      "securitySchemas": {
+        "Basic-Authentication": {
+          "type": "basic",
+          "description": "",
+          "x-ibm-authentication-registry": "testldap"
+        },
+        "Client-Secret": {
+          "type": "apiKey",
+          "description": "",
+          "in": "query",
+          "name": "client_secret"
+        },
+        "Client-ID": {
+          "type": "apiKey",
+          "description": "",
+          "in": "query",
+          "name": "client_id"
+        }
+      },
+      "x-ibm-configuration": {
+        "enforced": true,
+        "phase": "realized",
+        "testable": true,
+        "externalDocs": [],
+        "attachments": [
+          {
+            "title": "API Specification - Account Statement",
+            "description": "",
+            "id": "56fbada6e4b0ed7122178fb0",
+            "url": "https://10.80.45.168/v1/portal/orgs/5f50864ee4b022297ce71bc0/apis/5e09e2bce4b053a8b71048d8/documents/56fbada6e4b0ed7122178fb0/file"
+          },
+          {
+            "title": "API Specification - Acc Stmt Wrap",
+            "description": "",
+            "id": "56fbadc5e4b0ed7122178fb8",
+            "url": "https://10.80.45.168/v1/portal/orgs/5f50864ee4b022297ce71bc0/apis/5e09e2bce4b053a8b71048d8/documents/56fbadc5e4b0ed7122178fb8/file"
+          },
+          {
+            "title": "API Specification - Acc Stmt Transaction Count",
+            "description": "",
+            "id": "56fbade3e4b0ed7122178fbf",
+            "url": "https://10.80.45.168/v1/portal/orgs/5f50864ee4b022297ce71bc0/apis/5e09e2bce4b053a8b71048d8/documents/56fbade3e4b0ed7122178fbf/file"
+          }
+        ]
+      }
+    }
+  }

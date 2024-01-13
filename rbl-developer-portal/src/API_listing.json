@@ -1,0 +1,32 @@
+[
+	{
+      		"CatCode": "Collection",
+      		"ProdCode" : "Virt_AC_API_Plan",
+		"APICode": "Collection_Alert_DT",
+		"APIDisplayName":"Collection alert based on date and time"
+	},
+	{
+      		"CatCode": "Collection",
+      		"ProdCode" : "Virt_AC_API_Plan",
+		"APICode": "Virt_AC_Create",
+		"APIDisplayName":"Virtual Account Creation API"
+	},
+	{
+      		"CatCode": "Collection",
+      		"ProdCode" : "UPI_Collection_API",
+		"APICode": "UPI_ Collection_API_Details",
+		"APIDisplayName":"UPI Collections API"
+	},
+	{
+		"CatCode": "KYC",
+		"ProdCode" : "JOKATA_API",
+		"APICode": "AML_Check_API",
+		"APIDisplayName":"AML Check API"	
+  	},
+	{
+		"CatCode": "KYC",
+		"ProdCode" : "EKYC_Requery_API",
+		"APICode": "eKYC Requery API Product",
+		"APIDisplayName":""	
+  	}
+]
