@@ -63,7 +63,7 @@ const ApiProducts = ({ index, prodIndex }) => {
   return (
 
     <div>
-      <br />
+    {/*   <br />
 
       <ReactSearchBox
         placeholder="Search"
@@ -73,7 +73,7 @@ const ApiProducts = ({ index, prodIndex }) => {
         onSelect={(record) => { setSearchedData({ APIName: record.item.value, APIDesc: record.item.desc }) }}
       />
       <br />
-
+ */}
       <div className="row">
         {console.log(index, prodIndex)}
         {
