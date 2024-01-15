@@ -11,6 +11,7 @@ export default function APISidebar() {
   const [prodIndex, setProdIndex] = useState(null);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [expanded, setExpanded] = useState(null); // Track currently expanded submenu
+  const [prodExpanded, setProExpanded] = useState(null); //Track currently expanded prod subMenu
 
   const handleSearch = () => {
     setIndex(null);
@@ -38,6 +39,7 @@ export default function APISidebar() {
 
     // Toggle the expanded state of the clicked submenu
     setExpanded(catIndex);
+    setProExpanded(prodIndex)
 
     setBreadcrumbs(newBreadcrumbs);
   };
@@ -53,37 +55,42 @@ export default function APISidebar() {
           }}
           toggled={toggled}
           breakPoint='md'
-          style={{ backgroundColor: '#F6F6F7', paddingTop: '50px',paddingBottom:'90px', height:"550px", overflow:"auto", minWidth:"auto" }}
+          style={{ backgroundColor: '#F6F6F7', paddingTop: '50px' }}
         >
           <Menu>
             {data?.Category?.map((Data, catIndex) => (
               <SubMenu
-              icon={<FaCircle className='apiicon' />}
                 onClick={() => {
                   handleSubMenuClick(catIndex, null, null);
                 }}
-                className='apiicontext'
+                style={{
+                  color: '#303030',
+                  fontWeight: '500',
+                  fontSize: 16,
+                  borderBottomColor: '#e4e1e1',
+                  borderBottomStyle: 'inset',
+                  borderBottomWidth: '1px',
+                }}
                 label={Data?.CatName}
                 active={expanded === catIndex}
-                open={expanded === catIndex}
               >
                 {expanded === catIndex &&
                   Data.Product &&
-                  Data.Product.map((product, prodIndex) => (
+                  Data.Product.map((product, pIndex) => (
                     <SubMenu
-                      key={prodIndex}
+                      key={pIndex}
                       onClick={() => {
-                        handleSubMenuClick(catIndex, prodIndex, null);
+                        handleSubMenuClick(catIndex, pIndex, null);
                       }}
-                      className='apiicontextblue'
+                      style={{ color: '#304087', fontWeight: '500', fontSize: 16, background: '#f6f6f7' }}
                       label={product.ProdName}
+                      active={prodExpanded === pIndex}
                     >
-                      {product.API &&
+                      {prodExpanded === pIndex && product.API &&
                         product.API.map((api, apiIndex) => (
                           <MenuItem
                             key={apiIndex}
-                            className='apiicontextgray'
-                            style={{ color: '#5e5b5b' }}
+                            style={{ color: 'black', fontWeight: '400', fontSize: 15, background: '#f6f6f7' }}
                             disabled
                           >
                             {api.APIName}
@@ -102,7 +109,9 @@ export default function APISidebar() {
               <span key={index}>{index > 0 ? ' > ' : ''}{crumb}</span>
             ))}
           </div>
-          
+          <button className="btn btn-primary btn-lg btn-block d-sm-none" onClick={() => setToggled(!toggled)}>
+            Explore APIS
+          </button>
           <div className="row">
             <div className="col-lg-12">
               <ApiProducts index={index} prodIndex={prodIndex} handleSearch={handleSearch} />

@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://apideveloper.rblbank.com/test/sb/rbl/v1/cas"
+      "url": "https://apideveloper.rblbank.com/test/sb/rbl/v1/cas/"
     }
   ],
   "security": [],

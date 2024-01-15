@@ -1,37 +1,51 @@
-import React from 'react';
-import { RedocStandalone } from 'redoc';
-import Header from './header';
-import Footer from './footer';
-import Swagger from './swagger.json'
+import React from "react";
+import { RedocStandalone } from "redoc";
 
+import Swagger from "./swagger.json";
 
 export default function APIDetails(props) {
-
   return (
+    <>
+      {/*  <Header /> */}
+      <div id="redoc-container">
+        <RedocStandalone
+          onComplete={() => console.log("Redoc rendering complete")}
+          onHashChange={(hash) => console.log("Hash changed:", hash)}
+          specUrl={Swagger}
+          options={{
+            disableSearch: true,
 
-  <>
-  <Header />
-  <div id="redoc-container">
-  <RedocStandalone
-    specUrl={Swagger}
-    options={{
-      disableSearch: true,
-      theme: { colors: { primary: { main: '#dd5522' } } },
-      rightPanel:
-      {
-      backgroundColor: 'black',
-      width: '30%',
-      textColor: '#ffffff'
-      },  
-    
-    }
-    
-    }
+            theme: {
+              colors: { primary: { main: "#dd5522" } },
+              sidebar: {
+                activeBgColor: "red",
+                activeTextColor: "green",
+              },
 
-  />
-   </div>
-   <Footer />
-</>
-
+              rightPanel: {
+                backgroundColor: "white",
+                width: "30%",
+                textColor: "white",
+              },
+              codeBlock: {
+                backgroundColor: "black",
+                borderRadius: "20px",
+                tokens: {
+                  error: {
+                    color:'green'
+                  }
+                }
+              
+              },
+              components: {
+                borderRadius:20
+              },
+           
+            },
+          }}
+        />
+      </div>
+      {/*  <Footer /> */}
+    </>
   );
-};
+}
