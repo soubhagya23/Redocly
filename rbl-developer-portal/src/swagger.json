@@ -11,11 +11,13 @@
     }
   ],
   "security": [],
+  
   "tags": [
     {
       "description": "The following are the information that needs to be passed in every invocation to access \n1. API endpoints to be used for consuming  the service as provided above\n2. Basic Authorization to be used using the LDAP userid and password.\n3. Client_id and Client_secret to be set as Params Key and Values (need to remove spaces before and after the client id and client secret value field). Do not make any changes in these values. Both the keys can be seen in the respective App on the web portal ( refer developer portal FAQ & guidelines for details ) 4. Request type should be application/Json.\n",
       "name": "access requirements",
       "x-displayName": "Access Requirements"
+    
     },
     {
       "name": "Errors",
@@ -33,7 +35,7 @@
         "summary": "Get Account statement based on ",
         "requestBody": {
           "content": {
-            "application/json": {
+            "Content Type: application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Statement-Request"
               }
