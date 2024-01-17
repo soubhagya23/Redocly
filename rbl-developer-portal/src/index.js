@@ -4,11 +4,8 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-import Header from "./header";
-import Footer from "./footer";
 import { Container } from "semantic-ui-react";
 
-import MetaData from './MetaData';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -29,7 +26,6 @@ root.render(
     </BrowserRouter>
   
     <Container style={{ margin: 20 }}>
-   <MetaData /> 
   </Container>
   </React.StrictMode>
 );

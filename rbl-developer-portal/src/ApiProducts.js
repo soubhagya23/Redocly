@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import data from "./APICatalogue.json";
+import { Link } from 'react-router-dom'
 import ReactSearchBox from "react-search-box";
 
 import "./index.css"
@@ -104,7 +105,7 @@ const ApiProducts = ({ index, prodIndex }) => {
                               color: "#303030",
                             }}
                           >
-                            {searchedData.APIName}
+                            <Link to={`/apidetails?apiName=${searchedData.APIName}`}>{searchedData.APIName}</Link>
                           </h6>
                           <p
                             className="card-font"
@@ -122,9 +123,9 @@ const ApiProducts = ({ index, prodIndex }) => {
                           </p>
                           <br />
                           <br />
-                          <button className="btn common-btn-blue a-attention-link-add-script">
+                          <Link className="btn common-btn-blue a-attention-link-add-script" to={`/apidetails?apiName=${searchedData.APIName}`}>
                             Explore
-                          </button>
+                          </Link>
                           <br />
                           <br />
                           <br />
@@ -159,7 +160,7 @@ const ApiProducts = ({ index, prodIndex }) => {
                                   color: "#303030",
                                 }}
                               >
-                                {api.APIName}
+                                <Link to={`/apidetails?apiName=${api.APIName}`}>{api.APIName}</Link>
                               </h6>
                               <p
                                 className="card-font textheight2"
@@ -177,9 +178,9 @@ const ApiProducts = ({ index, prodIndex }) => {
                               </p>
                               <br />
                               <br />
-                              <button className="btn common-btn-blue a-attention-link-add-script">
+                              <Link className="btn common-btn-blue a-attention-link-add-script" to={`/apidetails?apiName=${api.APIName}`}>
                                 Explore
-                              </button>
+                              </Link>
                               <br />
                               <br />
                               <br />

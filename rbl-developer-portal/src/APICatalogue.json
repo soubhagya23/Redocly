@@ -9,7 +9,6 @@
             {
               "APIName": "Collection alert based on date and time ",
               "APIDesc": "It will be used to fetch the JSON requests of collection alerts based on date or time."
-              
             },
             {
               "APIName": "Virtual Account Creation API",
