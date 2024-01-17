@@ -1,33 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { RedocStandalone } from "redoc";
 import Swagger from "./swagger.json";
-import Collection from './content.json'
-import VirtualAPI from './virtualApi.json'
+import Collection from "./content.json";
+import VirtualAPI from "./virtualApi.json";
+import UPIColl from "./UPI-Collections-API .json"
 import "./index.css";
 import Header from "./header";
 import Footer from "./footer";
 import MetaData from "./MetaData";
 
 export default function APIDetails(props) {
-
-  const [json, setJson] = useState(Swagger)
+  const [json, setJson] = useState(Swagger);
 
   useEffect(() => {
     console.log(window.location.href);
 
     const query = new URLSearchParams(window.location.search);
-    const apiPath = query.get('apiPath');
+    const apiPath = query.get("apiPath");
 
     console.log(query);
     console.log({ apiPath });
 
-    if( apiPath === "CollectionAlert" ){
+    if (apiPath === "CollectionAlert") {
       setJson(Collection);
-    } else if( apiPath === "VirtualAPI" ){
-      setJson(VirtualAPI) ;
+    } else if (apiPath === "VirtualAPI") {
+      setJson(VirtualAPI);
+      
+      
     }
-    
-  }, [])
+    else if (apiPath === "UPI-Collections-API"){
+      setJson(UPIColl)
+    }
+  }, []);
 
   return (
     <>
@@ -63,7 +67,7 @@ export default function APIDetails(props) {
                 fontWeightRegular: "400",
                 fontWeightBold: "600",
                 fontWeightLight: "300",
-
+                fontFamily: 'Roboto, sans-serif',
                 headings: {
                   fontWeight: "600",
                 },
@@ -85,6 +89,7 @@ export default function APIDetails(props) {
                 backgroundColor: "white",
                 width: "40%",
                 textColor: "#ffffff",
+                fontFamily:'"Roboto",sans-serif'
               },
 
               codeBlock: {

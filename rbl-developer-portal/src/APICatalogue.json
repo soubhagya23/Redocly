@@ -16,8 +16,6 @@
               "APIDesc": "This API will help user to create a virtual account",
               "APIPath": "VirtualAPI"
             }
-           
-            
           ]
         },
         {
@@ -25,9 +23,9 @@
           "API": [
             {
               "APIName": "UPI Collections API",
-              "APIDesc": "Through RBL, a registered user can raise request for money from another registered user. Funds will be transferred when the user authorizes the collection."
+              "APIDesc": "Through RBL, a registered user can raise request for money from another registered user. Funds will be transferred when the user authorizes the collection.",
+              "APIPath": "UPI-Collections-API"
             }
-           
           ]
         }
       ]
@@ -42,7 +40,6 @@
               "APIName": "Aadhaar Ref Key Generation API",
               "APIDesc": "This API will generate Reference key against Aadhaar number."
             }
-         
           ]
         },
         {
@@ -52,7 +49,6 @@
               "APIName": "AML Check API",
               "APIDesc": "This  API enables the client to perform AML check for both the remitter and beneficiary to avoid money laundering activities."
             }
-           
           ]
         }
       ]
@@ -67,7 +63,6 @@
               "APIName": "Adhar Based Payment API",
               "APIDesc": "AePS API allows customers to withdraw cash using their Aadhaar & fingerprint. "
             }
-           
           ]
         },
         {
@@ -77,7 +72,6 @@
               "APIName": "Beneficiary Registration API",
               "APIDesc": "This API can be consumed by corporate who have nodal arrangement with bank .This API enables to capture the KYC details of merchants registered with aggregators."
             }
-            
           ]
         }
       ]
@@ -92,7 +86,6 @@
               "APIName": "Session creation API",
               "APIDesc": "This API will be used to create user session."
             }
-            
           ]
         },
         {
@@ -102,11 +95,9 @@
               "APIName": "Account Statement API",
               "APIDesc": "Get customer account statement API helps to fetch statement in PDF format based on passing account number and date range. Date range should not be more than 92 days."
             }
-           
           ]
         }
       ]
     }
- 
   ]
 }
