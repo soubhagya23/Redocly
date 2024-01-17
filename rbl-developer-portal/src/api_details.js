@@ -1,13 +1,16 @@
 import React from "react";
 import { RedocStandalone } from "redoc";
 import Swagger from "./swagger.json";
-import { darken, desaturate, lighten, readableColor, transparentize } from 'polished';
+import "./index.css";
+import Header from "./header";
+import Footer from "./footer";
+import MetaData from "./MetaData";
 
 export default function APIDetails(props) {
   return (
     <>
-      {/* <Header />  */}
-      <div id="redoc-container">
+  {/*    <Header />  */}
+      <div id="redoc-container" className="something">
         <RedocStandalone
           specUrl={Swagger}
           options={{
@@ -18,45 +21,11 @@ export default function APIDetails(props) {
             pathInMiddlePanel: true,
             theme: {
               colors: {
-                // text: {
-                //   primary: "#000000",
-                //   secondary: "#000000",
-                // },
-                // accent: {
-                //   main: '#000000'
-                // },
-                // primary: {
-                //   main: '#0000ff',
-                //   light: '#000000',
-                // },
-                tonalOffset: 0.2,
-                primary: {
-                  main: '#32329f',
-                  light: ({ colors }) => lighten(colors.tonalOffset, colors.primary.main),
-                  dark: ({ colors }) => darken(colors.tonalOffset, colors.primary.main),
-                  contrastText: ({ colors }) => readableColor(colors.primary.main),
-                },
-                success: {
-                  main: '#1d8127',
-                  light: ({ colors }) => lighten(colors.tonalOffset * 2, colors.success.main),
-                  dark: ({ colors }) => darken(colors.tonalOffset, colors.success.main),
-                  contrastText: ({ colors }) => readableColor(colors.success.main),
-                },
-                warning: {
-                  main: '#ffa500',
-                  light: ({ colors }) => lighten(colors.tonalOffset, colors.warning.main),
-                  dark: ({ colors }) => darken(colors.tonalOffset, colors.warning.main),
-                  contrastText: '#ffffff',
-                },
-                error: {
-                  main: '#d41f1c',
-                  light: ({ colors }) => lighten(colors.tonalOffset, colors.error.main),
-                  dark: ({ colors }) => darken(colors.tonalOffset, colors.error.main),
-                  contrastText: ({ colors }) => readableColor(colors.error.main),
-                },
-                gray: {
-                  50: '#FAFAFA',
-                  100: '#F5F5F5',
+                responses: {
+                  success: {
+                    color: "black",
+                    backgroundColor: "#3040874d",
+                  },
                 },
                 text: {
                   primary: '#333333',
@@ -129,51 +98,41 @@ export default function APIDetails(props) {
                   backgroundColor: 'rgba(38, 50, 56, 0.05)',
                   wrap: false,
                 },
-                links: {
-                  color: ({ colors }) => colors.primary.main,
-                  visited: ({ typography }) => typography.links.color,
-                  hover: ({ typography }) => lighten(0.2, typography.links.color),
-                  textDecoration: 'auto',
-                  hoverTextDecoration: 'auto',
-                },
               },
-              schema: {
-                // linesColor: '#DFC350',
-                // typeNameColor: '#DFC350',
-                // typeTitleColor: '#DFC350',
-                // requireLabelColor: '#DFC350',
-                // nestingSpacing: '#DFC350'
-                linesColor: theme =>
-                  lighten(
-                    theme.colors.tonalOffset,
-                    desaturate(theme.colors.tonalOffset, theme.colors.primary.main),
-                  ),
-                defaultDetailsWidth: '75%',
-                typeNameColor: theme => theme.colors.text.secondary,
-                typeTitleColor: theme => theme.schema.typeNameColor,
-                requireLabelColor: theme => theme.colors.error.main,
-                labelsTextSize: '0.9em',
-                nestingSpacing: '1em',
-                nestedBackground: '#fafafa',
-                arrow: {
-                  size: '1.1em',
-                  color: theme => theme.colors.text.secondary,
-                },
+              schemaView: {
+                linesColor: "#DFC350",
+                typeNameColor: "#DFC350",
+                typeTitleColor: "#DFC350",
+                requireLabelColor: "#DFC350",
+                nestingSpacing: "#DFC350",
               },
               sidebar: {
-                activeBgColor: "red",
-                activeTextColor: "blue",
+                activeBgColor: "hsla(229, 48%, 36%, 1)",
+                activeTextColor: "hsla(229, 48%, 36%, 1)",
                 backgroundColor: "#ededed",
               },
               rightPanel: {
-                width: '30%',
-                backgroundColor: '#fff',
-                textColor: '#000',
+                backgroundColor: "white",
+                width: "40%",
+                textColor: "#ffffff",
               },
+
               codeBlock: {
-                color: '#00ff00',
+                fontSize: "14px",
+                color: "green",
                 backgroundColor: "#000000",
                 borderRadius: "20px",
+                tokens: {
+                  color: "#a0fbaa",
+                },
+                codeSample: {
+                  color: "#a0fbaa",
+                },
+                text: {
+                  secondary: {
+                    color: "black",
+                  },
+                },
               },
               components: {
                 borderRadius: 20,
@@ -187,7 +146,7 @@ export default function APIDetails(props) {
           }
         />
       </div>
-      {/*  <Footer /> */}
+   {/*   <Footer />  */}
     </>
   );
 }
