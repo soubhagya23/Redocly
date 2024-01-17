@@ -105,7 +105,7 @@ const ApiProducts = ({ index, prodIndex }) => {
                               color: "#303030",
                             }}
                           >
-                            <Link to={`/apidetails?apiName=${searchedData.APIName}`}>{searchedData.APIName}</Link>
+                            <Link to={`/apidetails?apiPath=${searchedData.APIPath}`}>{searchedData.APIName}</Link>
                           </h6>
                           <p
                             className="card-font"
@@ -123,7 +123,7 @@ const ApiProducts = ({ index, prodIndex }) => {
                           </p>
                           <br />
                           <br />
-                          <Link className="btn common-btn-blue a-attention-link-add-script" to={`/apidetails?apiName=${searchedData.APIName}`}>
+                          <Link className="btn common-btn-blue a-attention-link-add-script" to={`/apidetails?apiPath=${searchedData.APIPath}`}>
                             Explore
                           </Link>
                           <br />
@@ -160,7 +160,7 @@ const ApiProducts = ({ index, prodIndex }) => {
                                   color: "#303030",
                                 }}
                               >
-                                <Link to={`/apidetails?apiName=${api.APIName}`}>{api.APIName}</Link>
+                                <Link to={`/apidetails?apiPath=${api.APIPath}`}>{api.APIName}</Link>
                               </h6>
                               <p
                                 className="card-font textheight2"
@@ -178,7 +178,7 @@ const ApiProducts = ({ index, prodIndex }) => {
                               </p>
                               <br />
                               <br />
-                              <Link className="btn common-btn-blue a-attention-link-add-script" to={`/apidetails?apiName=${api.APIName}`}>
+                              <Link className="btn common-btn-blue a-attention-link-add-script" to={`/apidetails?apiPath=${api.APIPath}`}>
                                 Explore
                               </Link>
                               <br />

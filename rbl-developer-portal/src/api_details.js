@@ -7,24 +7,30 @@ import "./index.css";
 import Header from "./header";
 import Footer from "./footer";
 import MetaData from "./MetaData";
+import axios from 'axios'
 
 export default function APIDetails(props) {
 
   const [json, setJson] = useState(Swagger)
 
+  const fetchData = async (path) => {
+    try {
+      const response = await fetch(path);
+      const data = await response.json();
+      console.log({data});
+      setJson(data);
+    } catch (error) {
+      console.error('Error reading JSON file:', error);
+    }
+  };
+
   useEffect(() => {
     console.log(window.location.href);
     const query = new URLSearchParams(window.location.search);
-    const apiName = query.get('apiName');
+    const apiPath = query.get('apiPath');
     console.log(query);
-    console.log({apiName});
-
-    if(apiName === 'Collection alert based on date and time'){
-      setJson(Collection)
-      console.log({json});
-    } else if (apiName === 'Virtual Account Creation API'){
-      setJson(VirtualAPI);
-    }
+    console.log({ apiPath });
+    fetchData(apiPath)
   }, [])
 
   return (
@@ -49,41 +55,10 @@ export default function APIDetails(props) {
                   },
                 },
                 text: {
-                  primary: '#333333',
-                  secondary: ({ colors }) => lighten(colors.tonalOffset, colors.text.primary),
+                  primary: "#424242",
+                  secondary: "#424242",
                 },
-                responses: {
-                  success: {
-                    backgroundColor: ({ colors }) => transparentize(0.93, colors.success.main),
-                    tabTextColor: ({ colors }) => colors.responses.success.color,
-                  },
-                  error: {
-                    color: ({ colors }) => colors.error.main,
-                    backgroundColor: ({ colors }) => transparentize(0.93, colors.error.main),
-                    tabTextColor: ({ colors }) => colors.responses.error.color,
-                  },
-                  redirect: {
-                    color: ({ colors }) => colors.warning.main,
-                    backgroundColor: ({ colors }) => transparentize(0.9, colors.responses.redirect.color),
-                    tabTextColor: ({ colors }) => colors.responses.redirect.color,
-                  },
-                  info: {
-                    color: '#87ceeb',
-                    backgroundColor: ({ colors }) => transparentize(0.9, colors.responses.info.color),
-                    tabTextColor: ({ colors }) => colors.responses.info.color,
-                  },
-                },
-                http: {
-                  get: '#2F8132',
-                  post: '#186FAF',
-                  put: '#95507c',
-                  options: '#947014',
-                  patch: '#bf581d',
-                  delete: '#cc3333',
-                  basic: '#707070',
-                  link: '#07818F',
-                  head: '#A23DAD',
-                },
+                tonalOffset: 0.2,
               },
 
               typography: {
@@ -94,18 +69,7 @@ export default function APIDetails(props) {
                 fontWeightLight: "300",
 
                 headings: {
-                  fontFamily: 'Montserrat, sans-serif',
-                  fontWeight: '400',
-                  lineHeight: '1.6em',
-                },
-                code: {
-                  fontSize: '13px',
-                  fontFamily: 'Courier, monospace',
-                  lineHeight: ({ typography }) => typography.lineHeight,
-                  fontWeight: ({ typography }) => typography.fontWeightRegular,
-                  color: '#e53935',
-                  backgroundColor: 'rgba(38, 50, 56, 0.05)',
-                  wrap: false,
+                  fontWeight: "600",
                 },
               },
               schemaView: {
@@ -120,6 +84,7 @@ export default function APIDetails(props) {
                 activeTextColor: "hsla(229, 48%, 36%, 1)",
                 backgroundColor: "#ededed",
               },
+
               rightPanel: {
                 backgroundColor: "white",
                 width: "40%",
@@ -127,7 +92,7 @@ export default function APIDetails(props) {
               },
 
               codeBlock: {
-                fontSize: "14px",
+                fontSize: "15px",
                 color: "green",
                 backgroundColor: "#000000",
                 borderRadius: "20px",
@@ -146,13 +111,8 @@ export default function APIDetails(props) {
               components: {
                 borderRadius: 20,
               },
-              fab: {
-                backgroundColor: '#f2f2f2',
-                color: '#0065FB',
-              },
             },
-          }
-          }
+          }}
         />
       </div>
       <Footer />
