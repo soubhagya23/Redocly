@@ -1,18 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RedocStandalone } from "redoc";
 import Swagger from "./swagger.json";
+import Collection from './content.json'
+import VirtualAPI from './virtualApi.json'
 import "./index.css";
 import Header from "./header";
 import Footer from "./footer";
 import MetaData from "./MetaData";
 
 export default function APIDetails(props) {
+
+  const [json, setJson] = useState(Swagger)
+
+  useEffect(() => {
+    console.log(window.location.href);
+    const query = new URLSearchParams(window.location.search);
+    const apiName = query.get('apiName');
+    console.log(query);
+    console.log({apiName});
+
+    if(apiName === 'Collection alert based on date and time'){
+      setJson(Collection)
+      console.log({json});
+    } else if (apiName === 'Virtual Account Creation API'){
+      setJson(VirtualAPI);
+    }
+  }, [])
+
   return (
     <>
-  {/*    <Header />  */}
+      <MetaData />
+      <Header />
       <div id="redoc-container" className="something">
         <RedocStandalone
-          specUrl={Swagger}
+          specUrl={json}
           options={{
             disableSearch: true,
             suppressWarnings: true,
@@ -66,24 +87,12 @@ export default function APIDetails(props) {
               },
 
               typography: {
-                // fontSize: "14px",
-                // lineHeight: "1.5em",
-                // fontWeightRegular: "400",
-                // fontWeightBold: "600",
-                // fontWeightLight: "300",
-                // color: 'black',
+                fontSize: "15px",
+                lineHeight: "1.5em",
+                fontWeightRegular: "400",
+                fontWeightBold: "600",
+                fontWeightLight: "300",
 
-                // headings: {
-                //   fontWeight: "600",
-                // },
-                fontSize: '14px',
-                lineHeight: '1.5em',
-                fontWeightRegular: '400',
-                fontWeightBold: '600',
-                fontWeightLight: '300',
-                fontFamily: 'Roboto, sans-serif',
-                smoothing: 'antialiased',
-                optimizeSpeed: true,
                 headings: {
                   fontFamily: 'Montserrat, sans-serif',
                   fontWeight: '400',
@@ -146,7 +155,7 @@ export default function APIDetails(props) {
           }
         />
       </div>
-   {/*   <Footer />  */}
+      <Footer />
     </>
   );
 }
