@@ -7,30 +7,26 @@ import "./index.css";
 import Header from "./header";
 import Footer from "./footer";
 import MetaData from "./MetaData";
-import axios from 'axios'
 
 export default function APIDetails(props) {
 
   const [json, setJson] = useState(Swagger)
 
-  const fetchData = async (path) => {
-    try {
-      const response = await fetch(path);
-      const data = await response.json();
-      console.log({data});
-      setJson(data);
-    } catch (error) {
-      console.error('Error reading JSON file:', error);
-    }
-  };
-
   useEffect(() => {
     console.log(window.location.href);
+
     const query = new URLSearchParams(window.location.search);
     const apiPath = query.get('apiPath');
+
     console.log(query);
     console.log({ apiPath });
-    fetchData(apiPath)
+
+    if( apiPath === "CollectionAlert" ){
+      setJson(Collection);
+    } else if( apiPath === "VirtualAPI" ){
+      setJson(VirtualAPI) ;
+    }
+    
   }, [])
 
   return (

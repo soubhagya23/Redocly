@@ -9,12 +9,12 @@
             {
               "APIName": "Collection alert based on date and time ",
               "APIDesc": "It will be used to fetch the JSON requests of collection alerts based on date or time.",
-              "APIPath": "D:\\redocly\\Redocly\\rbl-developer-portal\\src\\content.json"
+              "APIPath": "CollectionAlert"
             },
             {
               "APIName": "Virtual Account Creation API",
               "APIDesc": "This API will help user to create a virtual account",
-              "APIPath": "D:\\redocly\\Redocly\\rbl-developer-portal\\src\\virtualApi.json"
+              "APIPath": "VirtualAPI"
             }
            
             
