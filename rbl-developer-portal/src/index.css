@@ -1,4 +1,4 @@
-:root{
+:root {
   scroll-behavior: auto !important;
 }
 
@@ -158,31 +158,50 @@ body .common-header-wrap .rbl-nav-header .navbar-brand {
   font-weight: bold;
 }
 
-.something .sc-bCvmQg .eTZsJr span{
+.something .sc-bCvmQg .eTZsJr span {
   display: hidden;
 }
 
-.something h3{
-  margin-top: 60px!important;
+.something h3 {
+  margin-top: 60px !important;
 }
 
 .something h1 {
   font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    color: #212121;
+  font-weight: 400;
+  font-size: 24px;
+  color: #212121;
 }
 
-.something h4{
+.something h4 {
   font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    color: #212121;
+  font-weight: 400;
+  font-size: 20px;
+  color: #212121;
 }
 
-.something h2{
+.something h2 {
   font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    color: #212121;
+  font-weight: 400;
+  font-size: 18px;
+  color: #212121;
+}
+
+.something div[data-role="redoc-description"] li {
+  list-style-type: disc !important;
+}
+
+.something .redoc-markdown li {
+  list-style-type: disc !important;
+}
+
+.sc-bCvmQg {
+  color: white!important;
+}
+
+.something label{
+  font-family: "Roboto",sans-serif !important;
+}
+.iGcmRf{
+  border-radius: 7px;
 }

@@ -71,6 +71,7 @@ export default function APISidebar() {
                   borderBottomStyle: 'inset',
                   borderBottomWidth: '1px',
                 }}
+                icon={<FaCircle color="#b9b9b9" />}
                 label={Data?.CatName}
                 active={expanded === catIndex}
               >

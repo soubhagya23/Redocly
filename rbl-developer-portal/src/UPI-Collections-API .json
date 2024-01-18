@@ -1,0 +1,916 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://apideveloper.rblbank.com/test/sb/rbl/v1/"
+    }
+  ],
+  "info": {
+    "x-ibm-name": "upi-collections-api",
+    "title": "UPI Collections API",
+    "version": "1.0.0",
+    "description": "Api for upi collections services. Please note endpoint for all of these services are /upi/collections"
+  },
+  "x-ibm-configuration": {
+    "testable": true,
+    "enforced": true,
+    "cors": {
+      "enabled": false
+    },
+    "assembly": {
+      "execute": [
+        {
+          "operation-switch": {
+            "title": "operation-switch",
+            "case": [
+              {
+                "operations": [
+                  {
+                    "verb": "post",
+                    "path": "/upi/collectons"
+                  }
+                ],
+                "execute": [
+                  {
+                    "activity-log": {
+                      "title": "activity-log",
+                      "content": "payload",
+                      "error-content": "payload",
+                      "version": "1.0.0"
+                    }
+                  },
+                  {
+                    "proxy": {
+                      "title": "proxy",
+                      "timeout": 120,
+                      "verb": "keep",
+                      "cache-response": "protocol",
+                      "cache-ttl": 900,
+                      "version": "1.0.0",
+                      "target-url": "https://10.100.113.96/UPIAPI/APIServices.aspx"
+                    }
+                  }
+                ]
+              }
+            ],
+            "otherwise": [],
+            "version": "1.0.0"
+          }
+        }
+      ]
+    },
+    "phase": "realized"
+  },
+  "tags": [
+    {
+      "description": "The UPI platform aims at facilitating payments and provides 24x7 services for payment processing. The payments are processed quickly and seamlessly without exposing the account details. All banks can avail of the UPI services and be a part of next generation payment network as Payment Service Player (PSP). For this, banks need to integrate with the services exposed by UPI.Through RBL a registered user can raise request for money from another registered use. Funds will be transferred when the user authorizes the collection.",
+      "name": "introduction",
+      "x-displayName": "Introduction"
+    },
+    {
+      "description": "* API endpoints to be used for consuming  the service as provided above\n* Basic Authorization to be used using the LDAP user id and password\n* Client_id and Client_secret which are generated during Application creation on portal are to use as Parameter as Key and Values (Need to remove spaces before and after the client id and client secret value field) . Do not make any changes in these values.\n* Request type should be application/Json\n",
+      "name": "access requirements",
+      "x-displayName": "Access Requirements"
+    },
+    {
+      "description": "|     Sr No     |     Error Description                                    |                  |     Error Code     |\n|---------------|----------------------------------------------------------|------------------|--------------------|\n|     1.        |     Invalid Auth token                                   |     E001         |                    |\n|     2.        |     Invalid MCC                                          |     E003         |                    |\n|     3         |     No channel found or channel is not active            |     E004         |                    |\n|     4.        |     System Error                                         |     E005         |                    |\n|     5.        |     Aggregator Id, Merchant Id and hmac are Required     |     E006         |                    |\n|     6.        |     Invalid Search Request!                              |     E007         |                    |\n|     7.        |     Invalid Payment Request!                             |     E008         |                    |\n|     8.        |     Invalid Id Type!                                     |     E009         |                    |\n|     9.        |     Invalid TxnId!                                       |     ERR00094     |                    |\n|     10.       |     Invalid RefId!                                       |     ERR010       |                    |\n|     11.       |     SYSTEM_ERROR                                         |     MRER000      |                    |\n|     12.       |     NULL_VALUE                                           |     MRER002      |                    |\n|     13.       |     EMPTY_STRING                                         |     MRER003      |                    |\n|     14.       |     INVALID_FORMAT                                       |     MRER004      |                    |\n|     15.       |     MIN_LENGTH_REQUIRED                                  |     MRER005      |                    |\n|     16.       |     MAX_LENGTH_EXCEED                                    |     MRER006      |                    |\n|     17.       |     MIN_VALUE_REQUIRED                                   |     MRER007      |                    |\n|     18.       |     MAX_VALUE_EXCEED                                     |     MRER008      |                    |\n|     19.       |     NOT_NUMERIC                                          |     MRER009      |                    |\n|     20.       |     INVALID_ID_NUMBER                                    |     MRER010      |                    |\n",
+      "name": "errors",
+      "x-displayName": "Errors"
+    }
+  ],
+  "paths": {
+    "/upi/collectons (channel Partner Login)": {
+      "post": {
+        "description": "1. For UPI there will be 1 channel partner registered on RBL UPI Platform.\n\n2. Branch/Channel of the BC partner need to register over channel partner portal for session management.\n\n3. There can be multiple sessions with different credentials.\n\n4. Session Token will be created as per Username, API Password, time and branch / channel id of BC partner\n\n5. Session Token received in response of login request will be active for next 60 minutes only.\n\n6. Once received, this token can be used in passing/using in other API Methods.\n",
+        "tags": [
+          "Channel Partner Login"
+        ],
+        "summary": "Channel Partner Login",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Channel-Partner-Login-Request"
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Channel-Partner-Login-Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/upi/collectons (get auth token):": {
+      "post": {
+        "description": "1. For Generate Token on RBL UPI Platform Agent will have to capture mrchOrgId , aggrOrgId , note, refId, refUrl, Mobilenumber, HMAC, and other fields in valid form.\n2. BC partner has to generate Token which will be unique for 60 minutes only.\n3. Token received in response of GenerateAuthToken.\n4. Once received, this Token can be used as HMAC need to pass/use in other API Methods.\n",
+        "tags": [
+          "Get Auth Token"
+        ],
+        "summary": "Get Authorization token",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/GenerateAuthToken-Request"
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateAuthToken-Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/upi/collectons (Get Txn ID)": {
+      "post": {
+        "description": "1. For Get TxnID we have to pass Token generated from 2nd step as HMAC here.\n2. Txn Id is received in response of Get TxnId which have to pass in Collection API.\n",
+        "tags": [
+          "Get Txn ID"
+        ],
+        "summary": "Get transaction ID",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/GetTxnID-Request"
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTxnID-Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/upi/collectons (Validate VPA )": {
+      "post": {
+        "description": "1. For ValidateVPA we have to pass Customer mobile number, VPA, other fields.\n2. Status received in response of ValidateVPA. 1 means VPA is valid, else not valid.",
+        "tags": [
+          "Validate VPA"
+        ],
+        "summary": "Validate Virtual private address",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Validate-VPA-Request"
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validate-VPA-Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/upi/collectons (collect money)": {
+      "post": {
+        "description": "Using this API, collect request will get raised and go to the user/customer",
+        "tags": [
+          "Collect Money"
+        ],
+        "summary": "Collect Money",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Collect-Money-Request"
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collect-Money-Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/upi/collectons (transaction requery)": {
+      "post": {
+        "description": "1. For Transaction Re query we have to pass Txn ID of UPI or Ref ID of partner. We can do query in both ways.\n2. Status of the transaction.",
+        "tags": [
+          "Transaction Requery"
+        ],
+        "summary": "Transaction Requery",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/Transaction-Requery-Request"
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction-Requery-Response"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Channel-Partner-Login-Request": {
+        "type": "object",
+        "properties": {
+          "channelpartnerloginreq": {
+            "type": "object",
+            "properties": {
+              "Username": {
+                "type": "string",
+                "description": "Describes the Channel partner user name maintained by the RBL."
+              },
+              "Password": {
+                "type": "string",
+                "description": "Describe the API password given by RBL"
+              },
+              "Bcagent": {
+                "type": "string",
+                "description": "Describes the Branch/Channel unique ID maintained by the Channel Partner."
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "channelpartnerloginreq"
+        ]
+      },
+      "Channel-Partner-Login-Response": {
+        "type": "object",
+        "properties": {
+          "channelpartnerloginres": {
+            "type": "object",
+            "properties": {
+              "Sessiontoken": {
+                "type": "string",
+                "description": "Describes the session token created for Channel partner in encrypted format and it will be used in other API Methods and session token will valid till 1 hour."
+              },
+              "Timeout": {
+                "type": "string",
+                "description": "Describes the channel partner login timeout .Format(mm/dd/yyyy h:mm:ss Am/pm)"
+              },
+              "Status": {
+                "type": "string",
+                "description": "0-failure\n1-success"
+              }
+            }
+          }
+        }
+      },
+      "GenerateAuthToken-Request": {
+        "properties": {
+          "generateauthtokenreq": {
+            "type": "object",
+            "properties": {
+              "header": {
+                "type": "object",
+                "properties": {
+                  "sessiontoken": {
+                    "type": "string",
+                    "description": "Session Token received in Login Response"
+                  }
+                }
+              },
+              "mrchOrgId": {
+                "type": "string",
+                "description": "Merchant id (bank will share)"
+              },
+              "aggrOrgId": {
+                "type": "string",
+                "description": "Aggregator id(bank will share)"
+              },
+              "note": {
+                "type": "string",
+                "description": "Remarks of the transaction"
+              },
+              "refId": {
+                "type": "string",
+                "description": "Random number"
+              },
+              "refUrl": {
+                "type": "string",
+                "description": "URL"
+              },
+              "mobile": {
+                "type": "string",
+                "description": "Mobile number of the Partner"
+              },
+              "geocode": {
+                "type": "string",
+                "description": "geocode of a customer"
+              },
+              "location": {
+                "type": "string",
+                "description": "Location of the customer"
+              },
+              "ip": {
+                "type": "string",
+                "description": "IP of the device"
+              },
+              "type": {
+                "type": "string",
+                "description": "Type"
+              },
+              "id": {
+                "type": "string",
+                "description": "Random number"
+              },
+              "os": {
+                "type": "string",
+                "description": "OS of the device (Andriod /IOS)"
+              },
+              "app": {
+                "type": "string",
+                "description": "Application name"
+              },
+              "capability": {
+                "type": "string",
+                "description": "NA"
+              },
+              "hmac": {
+                "type": "string",
+                "description": "Key generated using mrchOrgId and aggrOrgId"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "generateauthtokenreq"
+        ]
+      },
+      "GenerateAuthToken-Response": {
+        "properties": {
+          "generateauthtokenres": {
+            "type": "object",
+            "properties": {
+              "Status": {
+                "type": "string",
+                "description": "0-failure\n1-success"
+              },
+              "Token": {
+                "type": "string",
+                "description": "Unique value of alpha numeric"
+              }
+            }
+          }
+        }
+      },
+      "GetTxnID-Request": {
+        "properties": {
+          "gettxnIDreq": {
+            "type": "object",
+            "properties": {
+              "header": {
+                "type": "object",
+                "properties": {
+                  "sessiontoken": {
+                    "type": "string",
+                    "description": "Session Token received in Login Response"
+                  }
+                }
+              },
+              "mrchOrgId": {
+                "type": "string",
+                "description": "Merchant id (bank will share)"
+              },
+              "aggrOrgId": {
+                "type": "string",
+                "description": "Aggregator id(bank will share)"
+              },
+              "mobile": {
+                "type": "string",
+                "description": "Mobile number of the Partner"
+              },
+              "geocode": {
+                "type": "string",
+                "description": "geocode of a customer"
+              },
+              "location": {
+                "type": "string",
+                "description": "Location of the customer"
+              },
+              "ip": {
+                "type": "string",
+                "description": "IP of the device"
+              },
+              "type": {
+                "type": "string",
+                "description": "Type"
+              },
+              "id": {
+                "type": "string",
+                "description": "Random number"
+              },
+              "os": {
+                "type": "string",
+                "description": "OS of the device (Andriod /IOS)"
+              },
+              "app": {
+                "type": "string",
+                "description": "Application name"
+              },
+              "capability": {
+                "type": "string",
+                "description": "NA"
+              },
+              "hmac": {
+                "type": "string",
+                "description": "Key generated using mrchOrgId and aggrOrgId"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "gettxnIDreq"
+        ]
+      },
+      "GetTxnID-Response": {
+        "properties": {
+          "errorres": {
+            "type": "object",
+            "properties": {
+              "Status": {
+                "type": "string",
+                "description": "0-failure\n1-success"
+              },
+              "Description": {
+                "type": "string",
+                "description": "Unique value of alpha numeric"
+              }
+            }
+          }
+        }
+      },
+      "Validate-VPA-Request": {
+        "properties": {
+          "validatevpareq": {
+            "type": "object",
+            "properties": {
+              "header": {
+                "type": "object",
+                "properties": {
+                  "sessiontoken": {
+                    "type": "string",
+                    "description": "Session Token received in Login Response"
+                  }
+                }
+              },
+              "mrchOrgId": {
+                "type": "string",
+                "description": "Merchant id (bank will share)"
+              },
+              "aggrOrgId": {
+                "type": "string",
+                "description": "Aggregator id(bank will share)"
+              },
+              "note": {
+                "type": "string",
+                "description": "Remarks of the transaction"
+              },
+              "refId": {
+                "type": "string",
+                "description": "Random number"
+              },
+              "orgTxnId": {
+                "type": "string",
+                "description": "Random number"
+              },
+              "refUrl": {
+                "type": "string",
+                "description": "URL"
+              },
+              "mobile": {
+                "type": "string",
+                "description": "Mobile number of the Partner"
+              },
+              "geocode": {
+                "type": "string",
+                "description": "geocode of a customer"
+              },
+              "location": {
+                "type": "string",
+                "description": "Location of the customer"
+              },
+              "ip": {
+                "type": "string",
+                "description": "IP of the device"
+              },
+              "type": {
+                "type": "string",
+                "description": "Type"
+              },
+              "id": {
+                "type": "string",
+                "description": "Random number"
+              },
+              "os": {
+                "type": "string",
+                "description": "OS of the device (Andriod /IOS)"
+              },
+              "app": {
+                "type": "string",
+                "description": "Application name"
+              },
+              "capability": {
+                "type": "string",
+                "description": "NA"
+              },
+              "hmac": {
+                "type": "string",
+                "description": "Key generated using mrchOrgId and aggrOrgId"
+              },
+              "Addr": {
+                "type": "string",
+                "description": "VPA of the customer."
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "valiatevpareq"
+        ]
+      },
+      "Validate-VPA-Response": {
+        "properties": {
+          "errorres": {
+            "type": "object",
+            "properties": {
+              "Status": {
+                "type": "string",
+                "description": "0-failure\n1-success"
+              },
+              "Description": {
+                "type": "string",
+                "description": "Unique value of alpha numeric"
+              }
+            }
+          }
+        }
+      },
+      "Collect-Money-Request": {
+        "properties": {
+          "collectrequest": {
+            "type": "object",
+            "properties": {
+              "header": {
+                "type": "object",
+                "properties": {
+                  "sessiontoken": {
+                    "type": "string",
+                    "description": "Session Token received in Login Response"
+                  }
+                }
+              },
+              "mrchOrgId": {
+                "type": "string",
+                "description": "Merchant id (bank will share)"
+              },
+              "aggrOrgId": {
+                "type": "string",
+                "description": "Aggregator id(bank will share)"
+              },
+              "note": {
+                "type": "string",
+                "description": "Remarks of the transaction"
+              },
+              "refId": {
+                "type": "string",
+                "description": "Random number"
+              },
+              "refUrl": {
+                "type": "string",
+                "description": "URL"
+              },
+              "orgTxnId": {
+                "type": "string",
+                "description": "Random number"
+              },
+              "txnId": {
+                "type": "string",
+                "description": "Random number"
+              },
+              "mobile": {
+                "type": "string",
+                "description": "Mobile number of the Partner"
+              },
+              "geocode": {
+                "type": "string",
+                "description": "geocode of a customer"
+              },
+              "location": {
+                "type": "string",
+                "description": "Location of the customer"
+              },
+              "ip": {
+                "type": "string",
+                "description": "IP of the device"
+              },
+              "type": {
+                "type": "string",
+                "description": "Type"
+              },
+              "id": {
+                "type": "string",
+                "description": "Random number"
+              },
+              "os": {
+                "type": "string",
+                "description": "OS of the device (Andriod /IOS)"
+              },
+              "app": {
+                "type": "string",
+                "description": "app id"
+              },
+              "capability": {
+                "type": "string",
+                "description": "Capability"
+              },
+              "hmac": {
+                "type": "string",
+                "description": "Encrypted HMAC"
+              },
+              "payeraddress": {
+                "type": "string",
+                "description": "Describe payer address (Customer’s VPA)"
+              },
+              "payername": {
+                "type": "string",
+                "description": "Describe payer name (Customer)"
+              },
+              "payeeaddress": {
+                "type": "string",
+                "description": "Describe payee address (Partner’s VPA)"
+              },
+              "payeename": {
+                "type": "string",
+                "description": "Describe payee name (Partner)"
+              },
+              "amount": {
+                "type": "string",
+                "description": "Describe amount"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "valiatevpareq"
+        ]
+      },
+      "Collect-Money-Response": {
+        "properties": {
+          "collectresponse": {
+            "type": "object",
+            "properties": {
+              "Status": {
+                "type": "string",
+                "description": "0-failure\n1-success"
+              },
+              "Result": {
+                "type": "string",
+                "description": "Message text"
+              }
+            }
+          }
+        }
+      },
+      "Transaction-Requery-Request": {
+        "properties": {
+          "searchrequest": {
+            "type": "object",
+            "properties": {
+              "header": {
+                "type": "object",
+                "properties": {
+                  "sessiontoken": {
+                    "type": "string",
+                    "description": "Session Token received in Login Response"
+                  }
+                }
+              },
+              "mrchOrgId": {
+                "type": "string",
+                "description": "Merchant id (bank will share)"
+              },
+              "aggrOrgId": {
+                "type": "string",
+                "description": "Aggregator id(bank will share)"
+              },
+              "mobile": {
+                "type": "string",
+                "description": "Mobile number of the Partner"
+              },
+              "geocode": {
+                "type": "string",
+                "description": "geocode of a customer"
+              },
+              "location": {
+                "type": "string",
+                "description": "Location of the customer"
+              },
+              "ip": {
+                "type": "string",
+                "description": "IP of the device"
+              },
+              "type": {
+                "type": "string",
+                "description": "Type"
+              },
+              "id": {
+                "type": "string",
+                "description": "Random number"
+              },
+              "os": {
+                "type": "string",
+                "description": "OS of the device (Andriod /IOS)"
+              },
+              "app": {
+                "type": "string",
+                "description": "app id"
+              },
+              "capability": {
+                "type": "string",
+                "description": "Capability"
+              },
+              "hmac": {
+                "type": "string",
+                "description": "Encrypted HMAC"
+              },
+              "orgTxnIdorrefId": {
+                "type": "string",
+                "description": "Describe the ID of Originating transaction"
+              },
+              "flag": {
+                "type": "string",
+                "description": "Describe flag 1- With partner id 0- With upi id"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "searchrequest"
+        ]
+      },
+      "Transaction-Requery-Response": {
+        "properties": {
+          "errorres": {
+            "type": "object",
+            "properties": {
+              "Status": {
+                "type": "string",
+                "description": "0-failure\n1-success"
+              },
+              "Description": {
+                "type": "string",
+                "description": "Message:Success /Failure/ In Progress"
+              }
+            }
+          }
+        }
+      }
+    },
+    "requestBodies": {
+      "Channel-Partner-Login-Request": {
+        "content": {
+          "application/xml": {
+            "example": "<?xml version=\"1.0\" encoding=\"UTF-8\">\n  <channelpartnerloginreq>\n  <username></username>\n  <password></password>\n  <bcagent></bcagent>\n  </channelpartnerloginreq>\n</xml>\n",
+            "schema": {
+              "allOf": [
+                {
+                  "description": "The vertex to read in",
+                  "title": "Vertex"
+                },
+                {
+                  "$ref": "#/components/schemas/Channel-Partner-Login-Request"
+                }
+              ]
+            }
+          }
+        },
+        "description": "The vertex to add to the graph",
+        "required": true
+      },
+      "GenerateAuthToken-Request": {
+        "content": {
+          "application/xml": {
+            "example": "<?xml version=\"1.0\" encoding=\"UTF-8\">\n  <customerregistrationreq>\n  <generateauthtokenreq>\n  <header>\n  <sessiontoken> </sessiontoken>\n  </header>\n  <mrchOrgId> </mrchOrgId>\n  <aggrOrgId> </aggrOrgId>\n  <note> </note>\n  <refId></refId>\n  <refUrl> </refUrl>\n  <mobile></mobile>\n  <geocode></geocode>\n  <location></location>\n  <ip></ip>\n  <type> </type>\n  <id></id>\n  <os> </os>\n  <app> </app>\n  <capability></capability>\n  <hmac> </hmac>\n  </generateauthtokenreq>\n</xml>\n",
+            "schema": {
+              "allOf": [
+                {
+                  "description": "The vertex to read in",
+                  "title": "Vertex"
+                },
+                {
+                  "$ref": "#/components/schemas/GenerateAuthToken-Request"
+                }
+              ]
+            }
+          }
+        },
+        "description": "The vertex to add to the graph",
+        "required": true
+      },
+      "GetTxnID-Request": {
+        "content": {
+          "application/xml": {
+            "example": "<?xml version=\"1.0\" encoding=\"UTF-8\">\n  <gettxnid>\n  <header>\n  <sessiontoken> </sessiontoken>\n  </header>\n  <mrchOrgId> </mrchOrgId>\n  <aggrOrgId> </aggrOrgId>\n  <mobile></mobile>\n  <geocode></geocode>\n  <location></location>\n  <ip></ip>\n  <type> </type>\n  <id></id>\n  <os> </os>\n  <app> k</app>\n  <capability></capability>\n  <hmac> </hmac>\n  </gettxnid>\n</xml>\n",
+            "schema": {
+              "allOf": [
+                {
+                  "description": "The vertex to read in",
+                  "title": "Vertex"
+                },
+                {
+                  "$ref": "#/components/schemas/GetTxnID-Request"
+                }
+              ]
+            }
+          }
+        },
+        "description": "The vertex to add to the graph",
+        "required": true
+      },
+      "Validate-VPA-Request": {
+        "content": {
+          "application/xml": {
+            "example": "<?xml version=\"1.0\" encoding=\"UTF-8\">\n  <validatevpa>\n  <header>\n  <sessiontoken> </sessiontoken>\n  </header>\n  <mrchOrgId> </mrchOrgId>\n  <aggrOrgId> </aggrOrgId>\n  <note> </note>\n  <refId> </refId>\n  <orgTxnId> </orgTxnId>\n  <refUrl> </refUrl>\n  <mobile></mobile>\n  <geocode></geocode>\n  <location></location>\n  <ip></ip>\n  <type> </type>\n  <id></id>\n  <os> </os>\n  <app> </app>\n  <capability></capability>\n  <hmac> </hmac>\n  <addr> </addr>\n  </validatevpa>\n</xml>\n",
+            "schema": {
+              "allOf": [
+                {
+                  "description": "The vertex to read in",
+                  "title": "Vertex"
+                },
+                {
+                  "$ref": "#/components/schemas/Validate-VPA-Request"
+                }
+              ]
+            }
+          }
+        },
+        "description": "The vertex to add to the graph",
+        "required": true
+      },
+      "Collect-Money-Request": {
+        "content": {
+          "application/xml": {
+            "example": "<?xml version=\"1.0\" encoding=\"UTF-8\">\n  <collectrequest>\n  <header>\n  <sessiontoken> </sessiontoken>\n  </header>\n  <mrchOrgId> </mrchOrgId>\n  <aggrOrgId> </aggrOrgId>\n  <note> </note>\n  <refId> </refId>\n  <refUrl> </refUrl>\n  <orgTxnId> </orgTxnId>\n  <txnId></txnId>\n  <mobile></mobile>\n  <geocode></geocode>\n  <location></location>\n  <ip></ip>\n  <type> </type>\n  <id></id>\n  <os> </os>\n  <app> </app>\n  <capability></capability>\n  <hmac> </hmac>\n  <payeraddress></payeraddress>\n  <payername> </payername>\n  <payeeaddress></payeeaddress>\n  <payeename> </payeename>\n  <amount></amount>\n  </collectrequest>\n</xml>\n",
+            "schema": {
+              "allOf": [
+                {
+                  "description": "The vertex to read in",
+                  "title": "Vertex"
+                },
+                {
+                  "$ref": "#/components/schemas/Collect-Money-Request"
+                }
+              ]
+            }
+          }
+        },
+        "description": "The vertex to add to the graph",
+        "required": true
+      },
+      "Transaction-Requery-Request": {
+        "content": {
+          "application/xml": {
+            "example": "<?xml version=\"1.0\" encoding=\"UTF-8\">\n  <searchrequest>\n  <header>\n  <sessiontoken> </sessiontoken>\n  </header>\n  <mrchOrgId> </mrchOrgId>\n  <aggrOrgId> </aggrOrgId>\n  <mobile></mobile>\n  <geocode></geocode>\n  <location></location>\n  <ip></ip>\n  <type> </type>\n  <id></id>\n  <os> </os>\n  <app> </app>\n  <capability></capability>\n  <hmac> </hmac>\n  <orgTxnIdorrefId> </orgTxnIdorrefId>\n  <flag></flag>\n  </searchrequest>\n</xml>\n",
+            "schema": {
+              "allOf": [
+                {
+                  "description": "The vertex to read in",
+                  "title": "Vertex"
+                },
+                {
+                  "$ref": "#/components/schemas/Transaction-Requery-Request"
+                }
+              ]
+            }
+          }
+        },
+        "description": "The vertex to add to the graph",
+        "required": true
+      }
+    }
+  }
+}
